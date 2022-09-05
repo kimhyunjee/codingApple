@@ -6,6 +6,8 @@ function App() {
 
   let post = '강남 우동 맛집';
   let [ title , setTitle ]=useState(['남자 코트 추천','강남 우동 맛집', '파이썬 독학']);
+  let [ thumb, setThumb ]=useState(0);
+
 
 
   //자바스크립트 destructuring 문법
@@ -36,7 +38,7 @@ function App() {
       </div>
       {/* <h4>{post}</h4> */}
       <div className="list">
-        <h4>{title[0]}</h4>
+        <h4>{title[0]} <span onClick={() => {setThumb(thumb+1)}}>👍</span>{thumb}</h4>
         <p>2월 17일 발행</p>
       </div>
 
