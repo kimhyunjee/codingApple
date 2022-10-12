@@ -26,6 +26,18 @@ function Basic() {
   // 원래 let post로 빼놓았던 걸 밑에 {post}로 화면에 띄워주고 있었는데, let post 뒤 내용을
   // 맘대로 바꾼다고 해서 화면도 같이 바뀌는게 아니라 손수 바꿔줘야 한다.
   // state를 짜두면 편하게 랜더링 되어서 바꾸지 않아도 된다.
+  let [ modal, setModal ] = useState(false);
+
+  const Modal = () => {
+    return (
+      <div className="modal">
+        <h4>제목</h4>
+        <p>날짜</p>
+        <p>상세내용</p>
+      </div>
+    )
+  }
+
 
   return (
     <div className="App">
@@ -45,14 +57,13 @@ function Basic() {
           setTitle(copy);
         }}
       >
-        {" "}
-        글 수정{" "}
+        글 수정
       </button>
-      <div className="list">
+
+      {/* <div className="list">
         <h4>
-          {title[0]}{" "}
-          <span
-            onClick={() => {
+          {title[0]}
+          <span onClick={() => {
               setThumb(thumb + 1);
             }}
           >
@@ -66,14 +77,40 @@ function Basic() {
       <div className="list">
         <h4>{title[1]}</h4>
         <p>2월 17일 발행</p>
-      </div>
+      </div> */}
 
-      <div className="list">
-        <h4>{title[2]}</h4>
+      {/* <div className="list">
+        <h4 onClick={()=>{setModal(!modal)}}>{title[2]}</h4>
         <p>2월 17일 발행</p>
-      </div>
+      </div> */}
+      {
+        title.map(function(a,i){
+          return (
+            <div className="list" key={i}>
+            <h4 onClick={()=>{setModal(!modal)}} >{title[i]}
+            <span onClick={() => {
+              let copy = [...thumb];
+              copy[i] = copy[i] +1;
+              setThumb(copy);
+            }}
+          >
+          👍
+          </span>
+          {thumb[i]}
+            </h4>
+            <p>2월 17일 발행</p>
+          </div>
+          )
+        })
+      }
+      {
+        modal === true ? <Modal /> : null
+      }
+
     </div>
   );
 }
+
+
 
 export default Basic;
