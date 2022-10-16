@@ -28,12 +28,13 @@ function Basic() {
   // state를 짜두면 편하게 랜더링 되어서 바꾸지 않아도 된다.
   let [ modal, setModal ] = useState(false);
 
-  const Modal = () => {
+  const Modal = (props) => {
     return (
-      <div className="modal">
-        <h4>제목</h4>
+      <div className="modal" style={{background:props.color}}>
+        <h4>{props.title}</h4>
         <p>날짜</p>
         <p>상세내용</p>
+        <button onClick={() => {props.setTitle(['여자코트 추천','강남 우동 맛집','파이썬 독학'])}}>글수정</button>
       </div>
     )
   }
@@ -104,7 +105,7 @@ function Basic() {
         })
       }
       {
-        modal === true ? <Modal /> : null
+        modal === true ? <Modal title={title} color='yellow' setTitle={setTitle}/> : null
       }
 
     </div>
