@@ -8,6 +8,9 @@ function Basic() {
     "파이썬 독학",
   ]);
   let [thumb, setThumb] = useState(0);
+  let [ modal, setModal ] = useState(false);
+  let [ btnTitle, setBtnTitle ] = useState(0)
+
 
   //자바스크립트 destructuring 문법
   // let array = ['Kim', 20];
@@ -26,12 +29,12 @@ function Basic() {
   // 원래 let post로 빼놓았던 걸 밑에 {post}로 화면에 띄워주고 있었는데, let post 뒤 내용을
   // 맘대로 바꾼다고 해서 화면도 같이 바뀌는게 아니라 손수 바꿔줘야 한다.
   // state를 짜두면 편하게 랜더링 되어서 바꾸지 않아도 된다.
-  let [ modal, setModal ] = useState(false);
+
 
   const Modal = (props) => {
     return (
       <div className="modal" style={{background:props.color}}>
-        <h4>{props.title}</h4>
+        <h4>{props.title[props.btnTitle]}</h4>
         <p>날짜</p>
         <p>상세내용</p>
         <button onClick={() => {props.setTitle(['여자코트 추천','강남 우동 맛집','파이썬 독학'])}}>글수정</button>
@@ -88,7 +91,7 @@ function Basic() {
         title.map(function(a,i){
           return (
             <div className="list" key={i}>
-            <h4 onClick={()=>{setModal(!modal)}} >{title[i]}
+            <h4 onClick={()=>{setModal(!modal); setBtnTitle(i)}} >{title[i]}
             <span onClick={() => {
               let copy = [...thumb];
               copy[i] = copy[i] +1;
@@ -105,7 +108,7 @@ function Basic() {
         })
       }
       {
-        modal === true ? <Modal title={title} color='yellow' setTitle={setTitle}/> : null
+        modal === true ? <Modal title={title} btnTitle={btnTitle} color='yellow' setTitle={setTitle}/> : null
       }
 
     </div>
