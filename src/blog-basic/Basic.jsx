@@ -10,7 +10,7 @@ function Basic() {
   let [thumb, setThumb] = useState(0);
   let [ modal, setModal ] = useState(false);
   let [ btnTitle, setBtnTitle ] = useState(0)
-
+  let [ input, setInput ] =useState('');
 
   //자바스크립트 destructuring 문법
   // let array = ['Kim', 20];
@@ -92,13 +92,14 @@ function Basic() {
           return (
             <div className="list" key={i}>
             <h4 onClick={()=>{setModal(!modal); setBtnTitle(i)}} >{title[i]}
-            <span onClick={() => {
+            <span onClick={(e) => {e.stopPropagation();
               let copy = [...thumb];
               copy[i] = copy[i] +1;
               setThumb(copy);
             }}
           >
-          👍
+          👍 
+          {/* span을 눌러도모달차이 꺼졌다켜졌다 함/이벤트버블링/클릭이벤트가 상위html로퍼짐 */}
           </span>
           {thumb[i]}
             </h4>
@@ -107,6 +108,12 @@ function Basic() {
           )
         })
       }
+      <input onChange={(e)=>{ setInput(e.target.value); console.log(input) }} />
+      <button onClick={() => {
+        let copy = [...title];
+        copy.unshift(input);
+        setTitle(copy)
+      }}> 글 발행</button>
       {
         modal === true ? <Modal title={title} btnTitle={btnTitle} color='yellow' setTitle={setTitle}/> : null
       }
