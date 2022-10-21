@@ -104,6 +104,11 @@ function Basic() {
           {thumb[i]}
             </h4>
             <p>2월 17일 발행</p>
+            <button onClick={() => {
+              let copy = [...title];
+              copy.splice(i,1);
+              setTitle(copy);
+            }}>삭제</button>
           </div>
           )
         })
